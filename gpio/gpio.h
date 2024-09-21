@@ -37,6 +37,12 @@
 #define PIN6_ID         (6u)
 #define PIN7_ID         (7u)
 
+/* Check validity of pin count */
+#define CHECK_PIN(pin_count)    ((pin_count) >= NUM_OF_PINS)
+
+/* Check validity of port count */
+#define CHECK_PORT(port_count)  ((port_count) >= NUM_OF_PORTS)
+
 /*******************************************************************************
 *                              Type Declerations                               *
 *******************************************************************************/
@@ -96,3 +102,4 @@ void GPIO_writePort(uint8 port_num, uint8 value);
 uint8 GPIO_readPort(uint8 port_num);
 
 #endif  /* GPIO_H_ */
+

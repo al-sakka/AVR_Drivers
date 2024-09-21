@@ -11,70 +11,26 @@
 *******************************************************************************/
 #include "gpio.h"
 
+/* Arrays for DDR, PORT and PIN registers */
+static volatile uint8* ddr[] = {&DDRA, &DDRB, &DDRC, &DDRD};
+static volatile uint8* port[] = {&PORTA, &PORTB, &PORTC, &PORTD};
+static volatile uint8* pin[] = {&PINA, &PINB, &PINC, &PIND};
+
 /*
 *   Description:
 *   Setup the direction of the required pin I/O
 */
 void GPIO_setupPinDirection(uint8 port_num, uint8 pin_num, GPIO_PinDirectionType direction)
 {
-    if((port_num >= NUM_OF_PORTS) || (pin_num >= NUM_OF_PINS))
+    if(CHECK_PIN(pin_num) || CHECK_PORT(port_num)) return;
+
+    if(direction == PIN_OUTPUT)
     {
-        /*
-            Do Nothing
-        */
+        SET_BIT(*ddr[port_num], pin_num);
     }
     else
     {
-        switch(port_num)
-        {
-            case PORTA_ID:
-                if(direction == PIN_OUTPUT)
-                {
-                    SET_BIT(DDRA, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(DDRA, port_num);
-                }
-
-                break;
-
-            case PORTB_ID:
-                if(direction == PIN_OUTPUT)
-                {
-                    SET_BIT(DDRB, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(DDRB, port_num);
-                }
-
-                break;
-
-            case PORTC_ID:
-                if(direction == PIN_OUTPUT)
-                {
-                    SET_BIT(DDRC, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(DDRC, port_num);
-                }
-
-                break;
-
-            case PORTD_ID:
-                if(direction == PIN_OUTPUT)
-                {
-                    SET_BIT(DDRD, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(DDRD, port_num);
-                }
-
-                break;
-        }
+        CLEAR_BIT(*ddr[port_num], port_num);
     }
 }
 
@@ -84,64 +40,15 @@ void GPIO_setupPinDirection(uint8 port_num, uint8 pin_num, GPIO_PinDirectionType
 */
 void GPIO_writePin(uint8 port_num, uint8 pin_num, uint8 value)
 {
-    if((port_num >= NUM_OF_PORTS) || (pin_num >= NUM_OF_PINS))
+    if(CHECK_PIN(pin_num) || CHECK_PORT(port_num)) return;
+
+    if(value == LOGIC_HIGH)
     {
-        /*
-            Do Nothing
-        */
+        SET_BIT(*port[port_num], pin_num);
     }
     else
     {
-        switch(port_num)
-        {
-            case PORTA_ID:
-                if(value == LOGIC_HIGH)
-                {
-                    SET_BIT(PORTA, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(PORTA, pin_num);
-                }
-
-                break;
-
-            case PORTB_ID:
-                if(value == LOGIC_HIGH)
-                {
-                    SET_BIT(PORTB, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(PORTB, pin_num);
-                }
-
-                break;
-
-            case PORTC_ID:
-                if(value == LOGIC_HIGH)
-                {
-                    SET_BIT(PORTC, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(PORTC, pin_num);
-                }
-
-                break;
-
-            case PORTD_ID:
-                if(value == LOGIC_HIGH)
-                {
-                    SET_BIT(PORTD, pin_num);
-                }
-                else
-                {
-                    CLEAR_BIT(PORTD, pin_num);
-                }
-
-                break;
-        }
+        CLEAR_BIT(*port[port_num], pin_num);
     }
 }
 
@@ -151,67 +58,16 @@ void GPIO_writePin(uint8 port_num, uint8 pin_num, uint8 value)
 */
 uint8 GPIO_readPin(uint8 port_num, uint8 pin_num)
 {
-    if((port_num >= NUM_OF_PORTS) || (pin_num >= NUM_OF_PINS))
+    if(CHECK_PIN(pin_num) || CHECK_PORT(port_num)) return 0xFF;     /* Indicates an Error */
+
+    if(*pin[port_num] & (1 << pin_num))
     {
-        /*
-            Do Nothing
-        */
+        return LOGIC_HIGH;
     }
     else
     {
-        switch(port_num)
-        {
-            case PORTA_ID:
-                if(PINA & (1 << pin_num))
-                {
-                    return LOGIC_HIGH;
-                }
-                else
-                {
-                    return LOGIC_LOW;
-                }
-
-                break;
-
-            case PORTB_ID:
-                if(PINB & (1 << pin_num))
-                {
-                    return LOGIC_HIGH;
-                }
-                else
-                {
-                    return LOGIC_LOW;
-                }
-
-                break;
-
-            case PORTC_ID:
-                if(PINC & (1 << pin_num))
-                {
-                    return LOGIC_HIGH;
-                }
-                else
-                {
-                    return LOGIC_LOW;
-                }
-
-                break;
-
-            case PORTD_ID:
-                if(PIND & (1 << pin_num))
-                {
-                    return LOGIC_HIGH;
-                }
-                else
-                {
-                    return LOGIC_LOW;
-                }
-
-                break;
-        }
+        return LOGIC_LOW;
     }
-
-    return 0;   /* Unreachable */
 }
 
 /*
@@ -220,33 +76,10 @@ uint8 GPIO_readPin(uint8 port_num, uint8 pin_num)
 */
 void GPIO_setupPortDirection(uint8 port_num, GPIO_PortDirectionType direction)
 {
-    if(port_num >= NUM_OF_PORTS)
-    {
-        /*
-            Do Nothing
-        */
-    }
-    else
-    {
-        switch(port_num)
-        {
-            case PORTA_ID:
-                DDRA = direction;
-                break;
+    if(CHECK_PORT(port_num)) return;
 
-            case PORTB_ID:
-                DDRB = direction;
-                break;
+    *ddr[port_num] = direction;
 
-            case PORTC_ID:
-                DDRC = direction;
-                break;
-
-            case PORTD_ID:
-                DDRD = direction;
-                break;
-        }
-    }
 }
 
 /*
@@ -255,33 +88,9 @@ void GPIO_setupPortDirection(uint8 port_num, GPIO_PortDirectionType direction)
 */
 void GPIO_writePort(uint8 port_num, uint8 value)
 {
-    if(port_num >= NUM_OF_PORTS)
-    {
-        /*
-            Do Nothing
-        */
-    }
-    else
-    {
-        switch(port_num)
-        {
-            case PORTA_ID:
-                PORTA = value;
-                break;
+    if(port_num >= NUM_OF_PORTS) return;
 
-            case PORTB_ID:
-                PORTB = value;
-                break;
-
-            case PORTC_ID:
-                PORTC = value;
-                break;
-
-            case PORTD_ID:
-                PORTD = value;
-                break;
-        }
-    }
+    *port[port_num] = value;
 }
 
 /*
@@ -290,33 +99,9 @@ void GPIO_writePort(uint8 port_num, uint8 value)
 */
 uint8 GPIO_readPort(uint8 port_num)
 {
-    if(port_num >= NUM_OF_PORTS)
-    {
-        /*
-            Do Nothing
-        */
-    }
-    else
-    {
-        switch(port_num)
-        {
-            case PORTA_ID:
-                return PINA;
-                break;
+    if(CHECK_PORT(port_num)) return 0xFF;       /* Indicates an Error */
 
-            case PORTB_ID:
-                return PINB;
-                break;
+    return *pin[port_num];
 
-            case PORTC_ID:
-                return PINC;
-                break;
-
-            case PORTD_ID:
-                return PIND;
-                break;
-        }
-    }
-
-    return 0;   /* Unreachable */
 }
+
