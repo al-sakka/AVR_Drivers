@@ -210,6 +210,8 @@ uint8 GPIO_readPin(uint8 port_num, uint8 pin_num)
                 break;
         }
     }
+
+    return 0;   /* Unreachable */
 }
 
 /*
@@ -231,15 +233,15 @@ void GPIO_setupPortDirection(uint8 port_num, GPIO_PortDirectionType direction)
             case PORTA_ID:
                 DDRA = direction;
                 break;
-            
+
             case PORTB_ID:
                 DDRB = direction;
                 break;
-            
+
             case PORTC_ID:
                 DDRC = direction;
                 break;
-            
+
             case PORTD_ID:
                 DDRD = direction;
                 break;
@@ -266,18 +268,18 @@ void GPIO_writePort(uint8 port_num, uint8 value)
             case PORTA_ID:
                 PORTA = value;
                 break;
-            
+
             case PORTB_ID:
                 PORTB = value;
                 break;
-            
+
             case PORTC_ID:
                 PORTC = value;
                 break;
-            
+
             case PORTD_ID:
                 PORTD = value;
-                break; 
+                break;
         }
     }
 }
@@ -301,11 +303,11 @@ uint8 GPIO_readPort(uint8 port_num)
             case PORTA_ID:
                 return PINA;
                 break;
-            
+
             case PORTB_ID:
                 return PINB;
                 break;
-            
+
             case PORTC_ID:
                 return PINC;
                 break;
@@ -315,4 +317,6 @@ uint8 GPIO_readPort(uint8 port_num)
                 break;
         }
     }
+
+    return 0;   /* Unreachable */
 }
