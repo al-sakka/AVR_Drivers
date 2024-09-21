@@ -13,8 +13,8 @@
 #define GPIO_H_
 
 #include <avr/io.h>
-#include "std_types.h"
-#include "common_macros.h"
+#include "../std_types.h"
+#include "../common_macros.h"
 
 /*******************************************************************************
 *                                Definitions                                  *
@@ -75,7 +75,7 @@ void GPIO_writePin(uint8 port_num, uint8 pin_num, uint8 value);
 *   Description:
 *   Read and return the value of the pin LOW/HIGH
 */
-uint8 GPIO_readPin(uint_8 port_num, uint8 pin_num);
+uint8 GPIO_readPin(uint8 port_num, uint8 pin_num);
 
 /*
 *   Description:

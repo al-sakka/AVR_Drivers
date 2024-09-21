@@ -34,7 +34,7 @@ void GPIO_setupPinDirection(uint8 port_num, uint8 pin_num, GPIO_PinDirectionType
                 }
                 else
                 {
-                    CLEAR_BIT(DDRA, port_num)
+                    CLEAR_BIT(DDRA, port_num);
                 }
 
                 break;
@@ -46,7 +46,7 @@ void GPIO_setupPinDirection(uint8 port_num, uint8 pin_num, GPIO_PinDirectionType
                 }
                 else
                 {
-                    CLEAR_BIT(DDRB, port_num)
+                    CLEAR_BIT(DDRB, port_num);
                 }
 
                 break;
@@ -58,7 +58,7 @@ void GPIO_setupPinDirection(uint8 port_num, uint8 pin_num, GPIO_PinDirectionType
                 }
                 else
                 {
-                    CLEAR_BIT(DDRC, port_num)
+                    CLEAR_BIT(DDRC, port_num);
                 }
 
                 break;
@@ -70,7 +70,7 @@ void GPIO_setupPinDirection(uint8 port_num, uint8 pin_num, GPIO_PinDirectionType
                 }
                 else
                 {
-                    CLEAR_BIT(DDRD, port_num)
+                    CLEAR_BIT(DDRD, port_num);
                 }
 
                 break;
@@ -149,7 +149,7 @@ void GPIO_writePin(uint8 port_num, uint8 pin_num, uint8 value)
 *   Description:
 *   Read and return the value of the pin LOW/HIGH
 */
-uint8 GPIO_readPin(uint_8 port_num, uint8 pin_num)
+uint8 GPIO_readPin(uint8 port_num, uint8 pin_num)
 {
     if((port_num >= NUM_OF_PORTS) || (pin_num >= NUM_OF_PINS))
     {

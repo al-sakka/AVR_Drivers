@@ -32,6 +32,6 @@
 #define BIT_IS_SET(PORT, PIN) ((PORT) & (1 << (PIN)))
 
 /* check if the pin is cleared */
-#define BIT_IS_SET(PORT, PIN) (!((PORT) & (1 << (PIN))))
+#define BIT_IS_CLEAR(PORT, PIN) (!((PORT) & (1 << (PIN))))
 
 #endif  /* COMMON_MACROS_H_ */

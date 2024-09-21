@@ -1,0 +1,9 @@
+
+# ignore all object files
+*.o
+
+# ignore all .hex files
+*.hex
+
+# ignore all .elf files
+*.elf
