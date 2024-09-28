@@ -102,4 +102,3 @@ void GPIO_writePort(uint8 port_num, uint8 value);
 uint8 GPIO_readPort(uint8 port_num);
 
 #endif  /* GPIO_H_ */
-

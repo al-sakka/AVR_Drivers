@@ -30,7 +30,7 @@ void GPIO_setupPinDirection(uint8 port_num, uint8 pin_num, GPIO_PinDirectionType
     }
     else
     {
-        CLEAR_BIT(*ddr[port_num], port_num);
+        CLEAR_BIT(*ddr[port_num], pin_num);
     }
 }
 
@@ -60,7 +60,8 @@ uint8 GPIO_readPin(uint8 port_num, uint8 pin_num)
 {
     if(CHECK_PIN(pin_num) || CHECK_PORT(port_num)) return 0xFF;     /* Indicates an Error */
 
-    if(*pin[port_num] & (1 << pin_num))
+    // if(*pin[port_num] & (1 << pin_num))
+    if(BIT_IS_SET(*pin[port_num], pin_num))
     {
         return LOGIC_HIGH;
     }
@@ -100,8 +101,5 @@ void GPIO_writePort(uint8 port_num, uint8 value)
 uint8 GPIO_readPort(uint8 port_num)
 {
     if(CHECK_PORT(port_num)) return 0xFF;       /* Indicates an Error */
-
     return *pin[port_num];
-
 }
-
