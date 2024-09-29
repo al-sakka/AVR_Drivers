@@ -138,7 +138,7 @@ void LCD_displayCharacter(uint8 data)
  * Description :
  * Display the required string on the screen
  */
-void LCD_displayString(const char* str)
+void LCD_displayString(const char* const str)
 {
     uint8 char_index;
 
@@ -166,7 +166,7 @@ void LCD_moveCursor(uint8 row, uint8 col)
  * Description :
  * Display the required string in a specified row and column index on the screen
  */
-void LCD_displayStringRowCol(uint8 row, uint8 col, const char* str)
+void LCD_displayStringRowCol(uint8 row, uint8 col, const char* const str)
 {
     LCD_moveCursor(row, col);
     LCD_displayString(str);
@@ -190,4 +190,22 @@ void LCD_displayInt(uint32 data)
 void LCD_clearScreen(void)
 {
     LCD_sendCommand(LCD_CLEAR_SCREEN);
+    _delay_ms(2);
+    LCD_moveCursor(0, 0);
+}
+
+/*
+ * Description :
+ * Display a custom character on LCD
+ */
+void LCD_displayCustomChar(uint8 location, uint8 charmap[])
+{
+    location &= 0x7; /* Limit to 8 custom locations (0-7) */
+    
+    LCD_sendCommand(LCD_SET_CGRAM_ADDR | (location << 3)); /* Set CGRAM address */
+
+    for(int i = 0; i < 8; i++)
+    {
+        LCD_displayCharacter(charmap[i]); /* Send each row of the pattern */
+    }
 }

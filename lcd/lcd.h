@@ -48,6 +48,7 @@
 #define LCD_CURSOR_OFF                       (0x0C)
 #define LCD_CURSOR_ON                        (0x0E)
 #define LCD_SET_CURSOR_LOCATION              (0x80)
+#define LCD_SET_CGRAM_ADDR                   (0x40)
 
 /*******************************************************************************
  *                      Functions Prototypes                                   *
@@ -100,5 +101,11 @@ void LCD_displayInt(uint32 data);
  * Send the clear screen command
  */
 void LCD_clearScreen(void);
+
+/*
+ * Description :
+ * Display a custom character on LCD
+ */
+void LCD_displayCustomChar(uint8 location, uint8 charma[]);
 
 #endif  /* LCD_H_ */
