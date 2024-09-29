@@ -29,9 +29,12 @@
 #define ROL(PORT, N) ((PORT) = ((PORT) << (N)) | ((PORT) >> (8 - (N))))
 
 /* check if the pin is set */
-#define BIT_IS_SET(PORT, PIN) ((PORT) & (1 << (PIN)) ? LOGIC_HIGH : LOGIC_LOW)
+#define BIT_IS_SET(PORT, PIN) ((PORT) & (1 << (PIN))
 
 /* check if the pin is cleared */
 #define BIT_IS_CLEAR(PORT, PIN) (!((PORT) & (1 << (PIN))))
+
+/* get a specific bit value */
+#define GET_BIT(PORT, BIT) (((PORT) >> (BIT)) & 1)
 
 #endif  /* COMMON_MACROS_H_ */
