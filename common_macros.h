@@ -29,7 +29,7 @@
 #define ROL(PORT, N) ((PORT) = ((PORT) << (N)) | ((PORT) >> (8 - (N))))
 
 /* check if the pin is set */
-#define BIT_IS_SET(PORT, PIN) ((PORT) & (1 << (PIN))
+#define BIT_IS_SET(PORT, PIN) ((PORT) & (1 << (PIN)))
 
 /* check if the pin is cleared */
 #define BIT_IS_CLEAR(PORT, PIN) (!((PORT) & (1 << (PIN))))
