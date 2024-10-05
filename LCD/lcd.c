@@ -11,7 +11,7 @@
 *******************************************************************************/
 
 #include "../common_macros.h"
-#include "../gpio/gpio.h"
+#include "../GPIO/gpio.h"
 #include <util/delay.h>
 #include <stdio.h>
 #include "lcd.h"

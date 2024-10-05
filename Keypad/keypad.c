@@ -10,7 +10,7 @@
 *
 *******************************************************************************/
 
-#include "../gpio/gpio.h"
+#include "../GPIO/gpio.h"
 #include "keypad.h"
 #include <util/delay.h>
 
