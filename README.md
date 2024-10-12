@@ -1,6 +1,3 @@
-Here's a sample `README.md` file for your GitHub repository:
-
-```markdown
 # AVR MCU Families - MCAL and HAL Drivers
 
 Welcome to the AVR MCU Families Driver Repository! This repository provides a comprehensive collection of Microcontroller Abstraction Layer (MCAL) and Hardware Abstraction Layer (HAL) drivers for various AVR microcontroller families. Each driver is designed to facilitate the development and deployment of embedded applications using AVR MCUs.
