@@ -1,6 +1,7 @@
 {
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
-        "icu.h": "c"
+        "icu.h": "c",
+        "*.gitignore": "c"
     }
 }

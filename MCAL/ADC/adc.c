@@ -12,7 +12,7 @@
 
 #include <avr/io.h>
 #include "adc.h"
-#include "../common_macros.h"
+#include "../../Utils/common_macros.h"
 
 /*******************************************************************************
 *                      Functions Definitions                                   *

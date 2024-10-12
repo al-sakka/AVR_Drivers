@@ -31,7 +31,9 @@ typedef unsigned char bool;
 #define LOGIC_LOW (0u)
 #endif
 
-#define NULL_PTR ((void *) 0x00)
+#define NULL_PTR            ((void *) 0x00)
+#define INITIAL_VALUE_ZERO  (0)
+#define NULL_CHAR           ('\0')
 
 /* Typedefs */
 typedef unsigned char        uint8;         /*             0 .. 255                         */

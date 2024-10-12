@@ -11,7 +11,7 @@
 *******************************************************************************/
 
 #include "icu.h"
-#include "../GPIO/gpio.h"
+#include "../../MCAL/GPIO/gpio.h"
 #include <avr/io.h>
 #include <avr/interrupt.h>
 

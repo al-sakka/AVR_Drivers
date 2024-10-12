@@ -13,11 +13,11 @@
 #ifndef ICU_H_
 #define ICU_H_
 
+#include "../../Utils/std_types.h"
+
 /*******************************************************************************
  *                                Definitions                                  *
 *******************************************************************************/
-
-#include "../std_types.h"
 
 #define ICP1_PORT_ID    PORTD_ID
 #define ICP1_PIN_ID     PIN6_ID

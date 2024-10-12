@@ -1,9 +1,12 @@
-#include "common_macros.h"
-#include "std_types.h"
+#include <avr/io.h>
 
 int main(void)
 {
-	while(1)
+	/* init */
+	
+	for(;;)
 	{
-	}
+	
+	
+	}	/* Super Loop */
 }

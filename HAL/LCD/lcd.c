@@ -10,8 +10,8 @@
 *
 *******************************************************************************/
 
-#include "../common_macros.h"
-#include "../GPIO/gpio.h"
+#include "../../Utils/common_macros.h"
+#include "../../MCAL/GPIO/gpio.h"
 #include <util/delay.h>
 #include <stdio.h>
 #include "lcd.h"
