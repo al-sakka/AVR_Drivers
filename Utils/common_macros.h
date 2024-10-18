@@ -1,17 +1,20 @@
- /******************************************************************************
- *
- * Module: Common - Macros
- *
- * File Name: Common_Macros.h
- *
- * Description: Commonly used Macros
- *
- * Author: Abdallah El-Sakka
- *
- *******************************************************************************/
+/******************************************************************************
+*
+* Module: Common - Macros
+*
+* File Name: Common_Macros.h
+*
+* Description: Commonly used Macros
+*
+* Author: Abdallah El-Sakka
+*
+*******************************************************************************/
 
 #ifndef COMMON_MACROS_H_
 #define COMMON_MACROS_H_
+
+/* Set main CPU frequency */
+#define CPU_FREQUENCY   (16000000UL)
 
 /* Set a certain bit in any port */
 #define SET_BIT(PORT, PIN) ((PORT) |= (1 << (PIN)))
