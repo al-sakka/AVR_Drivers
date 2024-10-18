@@ -18,10 +18,19 @@ typedef unsigned char bool;
 
 /* Boolean Values */
 #ifndef FALSE
-#define FASLE (0u)
+#define FALSE (0u)
 #endif
+
 #ifndef TRUE
 #define TRUE (1u)
+#endif
+
+#ifndef ERROR
+#define ERROR (FALSE)
+#endif
+
+#ifndef SUCCESS
+#define SUCCESS (TRUE)
 #endif
 
 #ifndef LOGIC_HIGH

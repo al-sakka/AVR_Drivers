@@ -124,12 +124,12 @@ uint8 I2C_readByteWithNACK(void)
 }
 
 /*
- *
+ *  Read status register
  */
-uint8 TWI_getStatus(void)
+uint8 I2C_getStatus(void)
 {
     /* Masking to eliminate first 3 bits and get the last 5 bits (status bits) */
-    uint8 status = TWSR & (0xF8);
+    uint8 status = (TWSR) & (0xF8);
 
     /* These five bits reflect the status of the TWI logic and the Two-wire Serial Bus */
     return ( status );
