@@ -1,6 +1,6 @@
 # AVR MCU Families - MCAL and HAL Drivers
 
-Welcome to the AVR MCU Families Driver Repository! This repository provides a comprehensive collection of Microcontroller Abstraction Layer (MCAL) and Hardware Abstraction Layer (HAL) drivers for various AVR microcontroller families. Each driver is designed to facilitate the development and deployment of embedded applications using AVR MCUs.
+This repository provides a comprehensive collection of Microcontroller Abstraction Layer (MCAL) and Hardware Abstraction Layer (HAL) drivers for various AVR microcontroller families. Each driver is designed to facilitate the development and deployment of embedded applications using AVR MCUs.
 
 ## Repository Contents
 
@@ -14,6 +14,8 @@ The MCAL (Microcontroller Abstraction Layer) drivers provide low-level access to
 - **UART (Universal Asynchronous Receiver/Transmitter)**: For serial communication with other devices.
 - **Timers**: For time-based operations such as delays, event timing, and task scheduling.
 - **PWM (Pulse Width Modulation)**: For generating PWM signals for motor control, LED dimming, and other applications.
+- **I2C (TWI - Two-Wire Interface)**: A low-level driver for communicating with I2C-compatible devices. This driver enables the Atmega32 to act as a master or slave in an I2C communication setup, supporting multi-master and multi-slave configurations for data transfer between the MCU and other I2C-enabled peripherals like sensors, displays, and EEPROMs.
+
 
 ### HAL Drivers
 The HAL (Hardware Abstraction Layer) drivers offer a higher-level interface for various peripherals, making it easier to develop applications without needing to handle low-level register configurations. The following drivers are included:
@@ -21,6 +23,8 @@ The HAL (Hardware Abstraction Layer) drivers offer a higher-level interface for 
 - **LCD**: Driver for interfacing with LCD displays.
 - **Keypad**: Driver for interacting with matrix keypads.
 - **Ultrasonic**: Driver for ultrasonic distance measurement sensors.
+- **EEPROM**: A high-level driver for reading from and writing to external EEPROM devices using the I2C (TWI) protocol. This driver abstracts the I2C communication and provides easy-to-use functions for storing and retrieving data in external EEPROM chips, such as the 24Cxx series, allowing persistent storage of data across power cycles.
+
 
 ## Getting Started
 
