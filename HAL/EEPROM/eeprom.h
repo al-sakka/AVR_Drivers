@@ -1,10 +1,10 @@
 /******************************************************************************
 *
-* Module: EEPROM
+* Module: 24C16-EEPROM
 *
 * File Name: eeprom.h
 *
-* Description: Header file for the EEPROM driver
+* Description: Header file for the 24C16-EEPROM driver
 *
 * Author: Abdallah El-Sakka
 *
