@@ -26,7 +26,7 @@
  * Enable the UART.
  * Setup the UART baud rate.
  */
-void UART_init(void)
+void UART_init(const UART_ConfigType * Config_Ptr)
 {
     /*********** UART Frame ***********
      *          Asynchronous         *
@@ -56,9 +56,49 @@ void UART_init(void)
      * UCSZ1:0 = 11 For 8-bit data mode
      * UCPOL   = 0 Used with the Synchronous operation only
      ***********************************************************************/
-    UCSRC = (1 << URSEL) | (1 << UCSZ0) | (1 << UCSZ1);
+    uint8 temp_UCSRC = (1 << URSEL);
 
-    uint16 UBRR_val = (uint16)(((F_CPU) / (8 * BAUD_RATE)) - (1));
+    if(Config_Ptr->stop_bit)
+    {
+    	temp_UCSRC |= (1 << USBS);
+    }
+
+    switch(Config_Ptr->bit_data)
+    {
+		case _5_bit:
+			break;
+		case _6_bit:
+			temp_UCSRC |= (1 << UCSZ0);
+			break;
+		case _7_bit:
+			temp_UCSRC |= (1 << UCSZ1);
+			break;
+		case _8_bit:
+			temp_UCSRC |= (1 << UCSZ1) | (1 << UCSZ0);
+			break;
+		case _9_bit:
+			temp_UCSRC |= (1 << UCSZ1) | (1 << UCSZ0);
+			UCSRB |= (1 << UCSZ2);
+			break;
+		default:
+			break;
+    }
+
+    switch(Config_Ptr->parity)
+    {
+		case Disabled:
+			break;
+		case Even_Parity:
+			temp_UCSRC |= (1 << UPM1);
+			break;
+		case Odd_Parity:
+			temp_UCSRC |= (1 << UPM1) | (1 << UPM0);
+			break;
+    }
+
+    UCSRC |= (temp_UCSRC);
+
+    uint16 UBRR_val = (uint16)((((CPU_FREQUENCY) / (8UL * Config_Ptr->baud_rate))) - (1));
 
     /* First LSB 8-bits from the BAUD_RATE inside UBRRL and last MSB 4-bits in UBRRH */
     UBRRL = (UBRR_val);
@@ -104,11 +144,14 @@ uint8 UART_receiveByte(void)
  */
 void UART_sendString(const uint8* str)
 {
-    while(*str != NULL_CHAR)
-    {
-        UART_sendByte(  (*str)  );
-        (++str);
-    }
+	uint8 i = 0;
+
+	/* Send the whole string */
+	while(str[i] != '\0')
+	{
+		UART_sendByte(str[i]);
+		i++;
+	}
 }
 
 /*
@@ -117,13 +160,18 @@ void UART_sendString(const uint8* str)
  */
 void UART_receiveString(uint8* str)
 {
-    uint8 _ch = 0;
+	uint8 i = 0;
 
-    while(str[_ch] != (STR_COMMON_CHAR))
-    {
-        str[_ch] = UART_receiveByte();
-        (++_ch);
-    }
+	/* Receive the first byte */
+	str[i] = UART_receiveByte();
 
-    str[_ch] = NULL_CHAR;
+	/* Receive the whole string until the '#' */
+	while(str[i] != '#')
+	{
+		i++;
+		str[i] = UART_receiveByte();
+	}
+
+	/* After receiving the whole string plus the '#', replace the '#' with '\0' */
+	str[i] = '\0';
 }
