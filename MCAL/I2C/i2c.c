@@ -24,7 +24,7 @@
 void I2C_init(void)
 {
     /* Equation to calculate TWBR register value */
-    uint8 twbr_value = (((CPU_FREQUENCY) / (2 * BIT_RATE)) - (8));
+    uint8 twbr_value = (uint8)(((CPU_FREQUENCY) / (2 * BIT_RATE)) - (8));
 
     TWBR = (twbr_value);
     TWSR = (INITIAL_VALUE_ZERO);
