@@ -50,11 +50,11 @@ void UART_init(const UART_ConfigType * Config_Ptr)
 
     /************************** UCSRC Description **************************
      * URSEL   = 1 The URSEL must be one when writing the UCSRC
-     * UMSEL   = 0 Asynchronous Operation
-     * UPM1:0  = 00 Disable parity bit
-     * USBS    = 0 One stop bit
-     * UCSZ1:0 = 11 For 8-bit data mode
-     * UCPOL   = 0 Used with the Synchronous operation only
+     * UMSEL   = Asynch/Synch Operation
+     * UPM1:0  = parity bit
+     * USBS    = stop bit
+     * UCSZ1:0 = For data mode
+     * UCPOL   = Used with the Synchronous operation only
      ***********************************************************************/
     uint8 temp_UCSRC = (1 << URSEL);
 
