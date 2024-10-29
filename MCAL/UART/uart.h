@@ -17,12 +17,7 @@
 
 #define BAUD_RATE           (9600UL)
 #define STR_COMMON_CHAR     ('#')
-//#define MCU_READY			(0x10)
-
-#define NEW_PASS_MODE		(0)
-#define OPEN_DOOR_MODE		(1)
-#define CHANGE_PASS_MODE	(2)
-#define ALARM_SIGNAL		(3)
+#define MCU_READY	    (0x10)
 
 /*******************************************************************************
 *                                Definitions                                   *
